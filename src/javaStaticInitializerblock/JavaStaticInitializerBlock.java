@@ -37,21 +37,25 @@ import java.util.Scanner;
  */
 public class JavaStaticInitializerBlock {
 
-    private static int B;
-    private static int H;
-    private static boolean flag;
+    static int B;
+    static int H;
+    static boolean flag = true;
 
     static {
         Scanner scan = new Scanner(System.in);
         B = scan.nextInt();
         H = scan.nextInt();
         scan.close();
-        if (B <= 0 || H <= 0) {
-            System.out.println("java.lang.Exception: Breadth and height must be positive");
-            flag = false;
-        } else {
-            flag = true;
+        try {
+            if (B <= 0 || H <= 0) {
+                flag = false;
+                throw new Exception("Breadth and height must be positive");
+            } 
+        } catch (Exception e) {
+            System.out.println(e);
+            System.exit(0);
         }
+
     }
 
     public static void main(String[] args) {
